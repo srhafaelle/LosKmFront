@@ -1,1 +1,142 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('/fonts/Roboto/roboto.ttf') format('truetype'),
+    url('/fonts/Roboto/roboto-italic.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('/fonts/Roboto_Mono/roboto-mono.ttf') format('truetype'),
+    url('/fonts/Roboto_Mono/roboto-mono-italic.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Serif';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('/fonts/Roboto_Serif/roboto-serif.ttf') format('truetype'),
+    url('/fonts/Roboto_Serif/roboto-serif-italic.ttf') format('truetype');
+  font-display: swap;
+}
+
+@layer utilities {
+  body,
+  html {
+    --font-roboto-sans: 'Roboto', sans-serif;
+    --font-roboto-mono: 'Roboto Mono', sans-serif;
+    --font-roboto-serif: 'Roboto Serif', sans-serif;
+  }
+}
+
+:root {
+  /* Si hablamos de los colores necesarios se debe asumir el uso de las siguientes variables para que sean usadas en todo el sistema de manera general */
+
+  /* Texto */
+  --text: oklch(0.05 0 0);
+  --text-light: oklch(0.97 0 0);
+  --text-h: oklch(0.15 0 0);
+  --text-muted: hsl(0.3 0 0);
+
+  /* Fondo */
+  /* Con Oklch */
+  --bg-dark: oklch(0.9 0 0);
+  --bg: oklch(0.95 0 0);
+  --bg-light: oklch(1 0 0);
+
+  /* Bordes */
+  --border: oklch(0.95 0 0);
+  --border-card: solid 1px var(--border);
+  --radius-default: 8px;
+  --highlight: oklch(100 0 0);
+
+  /* Gradientes para efectos neutros */
+  --gradient: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
+  --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
+
+  /* Sombras */
+  --shadow: 0px 3px 3px hsla(0 0% 0% 0.1), 0px 5px 5px hsla(0 0% 0% 0.18);
+  --shadow-hover: 0px 5px 5px hsla(0 0% 0% 0.1), 0px 7px 7px hsla(0 0% 0% 0.18);
+
+  /* Colores principales */
+  --primary: oklch(0.6229 0.1374 119.35);
+  --primary-darker: oklch(55.703% 0.12178 119.212);
+  --secondary: oklch(0.7976 0.1381 87.9);
+  --secondary-darker: oklch(72.341% 0.12347 88.817);
+
+  /* Colores con proposito */
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow-lg: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  font: 18px/145% var(--font-roboto-sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg-dark);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Texto */
+    --text: oklch(0.95 0 0);
+    --text-muted: hsl(0.7 0 0);
+
+    /* Fondo */
+    --bg-dark: oklch(0 0 0);
+    --bg: oklch(0.05 0 0);
+    --bg-light: oklch(0.1 0 0);
+
+    /* Bordes */
+    --border: oklch(0.3 0 0);
+    --border-card: 1px solid var(--border);
+    --highlight: oklch(0.6 0 0);
+
+    /* Gradientes para efectos neutros */
+
+    /* Sombras */
+    --shadow: 0px 2px 2px hsla(0 0% 0% 0.07), 0px 4px 4px hsla(0 0% 0% 0.15);
+
+    /* Colores principales */
+    --primary: #2450ec;
+    --secondary: #2450ec;
+
+    /* Colores con proposito */
+    --code-bg: #f4f3ec;
+    --accent: #aa3bff;
+    --accent-bg: rgba(170, 59, 255, 0.1);
+    --accent-border: rgba(170, 59, 255, 0.5);
+    --social-bg: rgba(244, 243, 236, 0.5);
+    --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  }
+}
+
+*,
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: var(--font-roboto-serif);
+}
