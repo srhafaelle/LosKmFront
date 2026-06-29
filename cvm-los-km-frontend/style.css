@@ -1,0 +1,120 @@
+/* Restablecer márgenes base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #121820; /* Fondo oscuro elegante */
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #ffffff;
+    text-align: center;
+}
+
+.container {
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.content-box {
+    background: #1e252e;
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #2a3441;
+}
+
+/* Estilos del título principal */
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Colores específicos para las letras */
+.letter-green {
+    color: #22c55e; /* Verde brillante */
+    font-size: 3.5rem;
+}
+
+.letter-yellow {
+    color: #eab308; /* Amarillo oro */
+    font-size: 3.5rem;
+}
+
+.text-light {
+    color: #cbd5e1;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+/* Línea separadora */
+.divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #334155, transparent);
+    margin: 2rem 0;
+}
+
+/* Estilos del subtítulo */
+.corporate-name {
+    font-size: 1.5rem;
+    color: #94a3b8;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+/* Animación de barra de carga inferior */
+.loading-bar {
+    width: 100%;
+    max-width: 300px;
+    height: 4px;
+    background-color: #334155;
+    margin: 0 auto;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress {
+    width: 40%;
+    height: 100%;
+    background-color: #22c55e;
+    border-radius: 2px;
+    position: absolute;
+    animation: loading 2s infinite ease-in-out;
+}
+
+@keyframes loading {
+    0% { left: -40%; }
+    50% { left: 100%; background-color: #eab308; }
+    100% { left: -40%; background-color: #22c55e; }
+}
+
+/* Ajustes para móviles */
+@media (max-width: 600px) {
+    .main-title {
+        font-size: 1.8rem;
+    }
+    .letter-green, .letter-yellow {
+        font-size: 2.5rem;
+    }
+    .text-light {
+        font-size: 1.5rem;
+    }
+    .corporate-name {
+        font-size: 1.1rem;
+    }
+}

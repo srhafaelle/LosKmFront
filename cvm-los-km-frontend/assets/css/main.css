@@ -1,0 +1,126 @@
+/* assets/css/main.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #121820; /* Fondo oscuro elegante */
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+.container {
+    padding: 20px;
+    width: 100%;
+    max-width: 450px; /* Un poco más angosto para el login */
+}
+
+.content-box {
+    background: #1e252e;
+    padding: 3rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #2a3441;
+}
+
+/* Identidad Visual CVM */
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.letter-green { color: #22c55e; font-size: 3rem; }
+.letter-yellow { color: #eab308; font-size: 3rem; }
+.text-light { color: #cbd5e1; font-size: 1.5rem; font-weight: 400; margin-left: 10px; }
+
+.corporate-name {
+    font-size: 1rem;
+    color: #94a3b8;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #334155, transparent);
+    margin: 2rem 0;
+}
+
+/* Estilos del Formulario */
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #121820;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    color: #ffffff;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #22c55e;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #22c55e;
+    color: #121820;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+    background-color: #1ea34d;
+}
+
+.btn-primary:disabled {
+    background-color: #334155;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+.error-msg {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid #ef4444;
+    padding: 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+    display: none;
+}
