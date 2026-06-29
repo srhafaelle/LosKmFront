@@ -1,0 +1,17 @@
+.card-container {
+    padding: 2rem 1rem;
+    border: var(--border-card);
+    border-radius: var(--radius-default);
+    box-shadow: var(--shadow);
+
+    /* Set background */
+    background: var(--bg);
+    background-size: 200% auto;
+    background-position: bottom center;
+
+    transition: box-shadow 300ms ease-in;
+}
+
+.card-container:hover {
+    box-shadow: 0 15px 25px rgba(0 0 0 0.2);
+}

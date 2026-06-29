@@ -1,0 +1,44 @@
+:host {
+    display: block;
+    width: 100%;
+}
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-light);
+    border: var(--border-card);
+    border-color: var(--border);
+    border-radius: var(--radius-default);
+    box-shadow: var(--shadow);
+    padding: 0rem 0.5rem;
+
+    transition: box-shadow 300ms ease-in;
+}
+
+.input-container:focus-within {
+    box-shadow: 0 15px 25px rgba(0 0 0 0.2);
+}
+
+.has-icon {
+    gap: 1rem;
+}
+
+.icon-element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.5rem 0.5rem;
+    background-color: transparent;
+    width: 100%;
+    color: var(--text);
+}
