@@ -1,36 +1,23 @@
 :host {
     width: 80%;
 }
+@media (min-width: 640px) {
+    :host {
+        width: 450px;
+    }
+}
+
 .login-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
     width: 100%;
 }
-
 .login-card {
     background-color: var(--bg);
     width: 90%;
-}
-
-@media (min-width: 640px) {
-    :host {
-        width: 450px;
-    }
-    .login-card {
-        width: 450px;
-    }
-}
-
-@media (min-width: 1024px) {
-    :host {
-        width: 600px;
-    }
-    .login-card {
-        width: 600px;
-    }
 }
 
 .input-elements {
@@ -42,7 +29,7 @@
     width: 100%;
 }
 
-.action-element {
+.action-elements {
     display: flex;
     flex-direction: column;
     align-items: center;

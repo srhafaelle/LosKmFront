@@ -10,7 +10,8 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
     viewProviders: [provideIcons({ bootstrapKey, bootstrapPerson })],
 })
 export class InputComponent {
-    placeholder = input.required<string>();
+    label = input.required<string>();
+    placeholder = input<string>('');
     type = input<string>('text');
 
     icon = input<'bootstrapPerson' | 'bootstrapKey' | ''>('');

@@ -10,14 +10,20 @@
     border: var(--border-card);
     border-color: var(--border);
     border-radius: var(--radius-default);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-light);
     padding: 0rem 0.5rem;
 
-    transition: box-shadow 300ms ease-in;
+    transition: border-color 300ms ease-in;
 }
 
 .input-container:focus-within {
-    box-shadow: 0 15px 25px rgba(0 0 0 0.2);
+    border-color: var(--primary);
+}
+
+@media (prefers-color-scheme: dark) {
+    .input-container:focus-within {
+        border-color: var(--secondary-darker);
+    }
 }
 
 .has-icon {

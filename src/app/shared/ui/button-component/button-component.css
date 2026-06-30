@@ -1,14 +1,16 @@
+:host {
+    width: 100%;
+}
 button {
     display: flex;
     flex: 1;
     justify-content: center;
     align-items: center;
     padding: 0.5rem 0rem;
-    width: 100%;
     border: solid 1px var(--primary-darker);
     border-radius: var(--radius-default);
     cursor: pointer;
-
+    width: 100%;
     transition: box-shadow 300ms ease-in;
 }
 

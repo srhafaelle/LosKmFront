@@ -1,6 +1,9 @@
-<div class="input-container" [class.has-icon]="hasIcon()">
-    @if (!hasIcon()) {
-        <ng-icon [name]="icon()"></ng-icon>
-    }
-    <input [type]="type()" [placeholder]="placeholder()" />
+<div class="label-container">
+    <span>{{ label() }}</span>
+    <div class="input-container" [class.has-icon]="hasIcon()">
+        @if (!hasIcon()) {
+            <ng-icon [name]="icon()"></ng-icon>
+        }
+        <input [type]="type()" [placeholder]="placeholder()" />
+    </div>
 </div>
