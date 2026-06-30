@@ -57,3 +57,20 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Environment variables
+
+Para que la aplicación funcione sin problemas es necesario agregar el apartado de variables de entorno. Para el mismo es necesario usar el siguiente comando:
+
+```bash
+ng g environments
+```
+
+Posteriormente debe realizar los siguientes cambios en el archivo *environment.development.ts* y *environment.ts* con el uso del siguiente esquema:
+
+```typescript
+export const environment = {
+    production: false || true, // En caso del archivo environment.development.ts se usa en valor false,
+    apiUrl: `https://url-de-api`, // Importante para que las peticiones puedan llegar al destino deseado
+}
+```
