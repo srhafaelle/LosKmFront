@@ -11,7 +11,7 @@ export const appConfig: ApplicationConfig = {
         provideBrowserGlobalErrorListeners(),
         provideRouter(routes),
         provideClientHydration(withEventReplay()),
-        provideHttpClient(withInterceptors([])),
+        provideHttpClient(withInterceptors([])), // TODO: PONER EL INTERCEPTOR WITH_BEARER_INTERCEPTOR CUANDO SE NECESITE PROBAR LA PETICION SOBRE ENDPOINTS PROTEGIDOS
         provideNgIconsConfig({ size: '1.5em', color: 'var(--text)' }, withExceptionLogger()),
     ],
 };
