@@ -79,6 +79,7 @@
     --accent-bg: rgba(170, 59, 255, 0.1);
     --accent-border: rgba(170, 59, 255, 0.5);
     --social-bg: rgba(244, 243, 236, 0.5);
+    --warning: oklch(0.6691 0.1795 31.51);
 
     font: 18px/145% var(--font-roboto-sans);
     letter-spacing: 0.18px;
@@ -137,6 +138,7 @@
         --accent-bg: rgba(170, 59, 255, 0.1);
         --accent-border: rgba(170, 59, 255, 0.5);
         --social-bg: rgba(244, 243, 236, 0.5);
+        --warning: oklch(0.5267 0.1795 31.51);
     }
 }
 

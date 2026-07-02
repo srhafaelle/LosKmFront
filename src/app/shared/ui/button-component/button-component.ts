@@ -11,10 +11,4 @@ export class ButtonComponent {
     kind = input<'primary' | 'secondary'>('primary');
 
     context = computed(() => `button-${this.kind()}`);
-
-    constructor() {
-        afterNextRender(() => {
-            console.log(this.context());
-        });
-    }
 }

@@ -16,3 +16,5 @@ export type LoginCredentials = {
 export type AuthUser = User & {
     token: string;
 };
+
+export type ErrorMessages = Record<string, string | ((error: any) => string)>;
