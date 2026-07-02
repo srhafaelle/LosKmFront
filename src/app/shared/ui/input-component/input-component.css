@@ -48,3 +48,11 @@ input {
     width: 100%;
     color: var(--text);
 }
+
+.error-text {
+    color: var(--warning);
+}
+
+.error-container {
+    border-color: var(--warning);
+}

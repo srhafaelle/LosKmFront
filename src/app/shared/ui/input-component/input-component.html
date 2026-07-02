@@ -1,9 +1,23 @@
 <div class="label-container">
     <span>{{ label() }}</span>
-    <div class="input-container" [class.has-icon]="hasIcon()">
+    <div
+        class="input-container"
+        [class.has-icon]="hasIcon()"
+        [class.error-container]="errorMessage()"
+    >
         @if (!hasIcon()) {
             <ng-icon [name]="icon()"></ng-icon>
         }
-        <input [type]="type()" [placeholder]="placeholder()" />
+        <input
+            [type]="type()"
+            [placeholder]="placeholder()"
+            [value]="value"
+            [disabled]="isDisabled"
+            (input)="onInput($event)"
+            (blur)="onTouch()"
+        />
     </div>
+    @if (errorMessage()) {
+        <span class="error-text">{{ errorMessage() }}</span>
+    }
 </div>
