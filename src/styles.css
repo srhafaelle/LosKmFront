@@ -104,16 +104,14 @@
         --text-muted: oklch(0.85 0 0);
 
         /* Fondo */
-        /* --bg-dark: oklch(0.2068 0.0184 255.73); */
-        /* --bg-dark: oklch(0.2068 0.0184 244.09); */
-        --bg-dark: #121820;
-        --bg: oklch(0.2617 0.0197 254.84);
-        --bg-light: oklch(0.3117 0.0197 254.84);
+        --bg-dark: oklch(0.2329 0.0291 253.71);
+        --bg: oklch(0.2953 0.0291 253.71);
+        --bg-light: oklch(0.316 0.0291 253.71);
 
         /* Bordes */
-        --border: oklch(0.3 0 0);
+        --border: oklch(0.6 0 0);
         --border-card: 1px solid var(--border);
-        --highlight: oklch(0.6 0 0);
+        --highlight: oklch(0.9 0 0);
 
         /* Gradientes para efectos neutros */
 
@@ -121,9 +119,9 @@
         /* --shadow: 0px 2px 2px hsla(0 0% 0% 0.07), 0px 4px 4px hsla(0 0% 0% 0.15); */
         /* --shadow: 3px 3px 3px hsla(0, 0%, 75%, 0.15), 0px 5px 5px hsla(0, 0%, 75%, 0.2); */
         --shadow:
-            0px 10px 10px hsla(0, 0%, 0%, 0.15), -10px 10px 10px hsla(0, 0%, 0%, 0.2),
-            10px 10px 10px hsla(0, 0%, 0%, 0.2);
-        --shadow-light: 0px 3px 3px hsla(0, 0%, 0%, 0.15), 0px 5px 5px hsla(0, 0%, 0%, 0.2);
+            0px 10px 10px hsla(0, 0%, 50%, 0.15), -10px 10px 10px hsla(0, 0%, 50%, 0.2),
+            10px 10px 10px hsla(0, 0%, 50%, 0.2);
+        --shadow-light: 0px 3px 3px hsla(0, 0%, 35%, 0.15), 0px 5px 5px hsla(0, 0%, 35%, 0.2);
 
         /* Colores principales */
         --primary: oklch(0.6229 0.1374 119.35);
