@@ -5,12 +5,12 @@
     position: fixed;
     top: 1rem;
     left: 1rem;
-    z-index: 50;
+    z-index: 30;
     background: #2563eb;
     color: white;
     border: none;
     padding: 0.5rem;
-    border-radius: 0.375rem;
+    border-radius: var(--radius-default);
     cursor: pointer;
 
     svg {
@@ -32,8 +32,8 @@
     left: -300px; /* Oculto por defecto en móvil */
     width: 300px;
     height: 100vh;
-    background: #1e293b;
-    color: #f8fafc;
+    background: var(--bg);
+    color: var(--text);
     z-index: 45;
     transition: left 0.3s ease-in-out;
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
@@ -49,8 +49,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+
+    h2 {
+        margin: 0;
+        font-size: 1.25rem;
+    }
+}
+
+.sidebar-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 1.5rem;
-    border-bottom: 1px solid #334155;
+    border-top: 1px solid var(--border);
 
     h2 {
         margin: 0;
@@ -66,6 +79,12 @@
     cursor: pointer;
 }
 
+.sidebar-nav {
+    flex: 1; /* Ocupa todo el espacio entre el header y el footer */
+    min-height: 0; /* Truco vital de Flexbox para evitar que el contenedor colapse */
+    overflow-y: auto; /* El scroll va aquí, en el contenedor */
+}
+
 .sidebar-nav ul {
     list-style: none;
     padding: 1rem;
@@ -78,20 +97,22 @@
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        padding: 0.75rem 1rem;
-        color: #cbd5e1;
+        padding: 0.5rem 1rem;
+        color: var(--text);
         text-decoration: none;
-        border-radius: 0.375rem;
+        border-radius: var(--radius-default);
         transition:
-            background 0.2s,
-            color 0.2s;
+            background 300ms ease-in,
+            color 300ms ease-in;
 
         &:hover,
         &.active-route {
-            background: #334155;
-            color: white;
+            background: var(--primary);
+            color: var(--text-light);
         }
     }
+
+    /* Para asegurarse que en caso de que la cantidad de menus cambie drasticamente se pueda permitir scroll dentro de esta sección */
 }
 
 /* --- Media Query para Escritorio (>768px) --- */
@@ -103,10 +124,24 @@
     }
 
     .sidebar-container {
-        position: relative; /* Vuelve al flujo normal del documento */
+        position: sticky; /* Vuelve al flujo normal del documento */
         left: 0; /* Siempre visible */
         z-index: 10;
         box-shadow: none;
-        border-right: 1px solid #334155;
+        border-right: 1px solid var(--border);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .sidebar-nav ul {
+        a {
+            &:hover,
+            &.active-route {
+                background: var(--primary-darker);
+                color: var(--text-light);
+            }
+        }
+
+        /* Para asegurarse que en caso de que la cantidad de menus cambie drasticamente se pueda permitir scroll dentro de esta sección */
     }
 }

@@ -1,3 +1,33 @@
 .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid var(--text-muted);
+}
+
+.mobile-toggle-btn {
+    background: transparent;
+    padding: 0.5rem 0rem;
+    border: none;
+    cursor: pointer;
+}
+
+.span-green {
+    font-family: var(--font-roboto-sans);
+    font-weight: 900;
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.span-yellow {
+    font-family: var(--font-roboto-sans);
+    font-weight: 900;
+    font-size: 2rem;
+    color: var(--secondary);
+}
+
+@media (min-width: 769px) {
+    .mobile-toggle-btn {
+        display: none; /* Ocultamos elementos exclusivos de móvil */
+    }
 }
