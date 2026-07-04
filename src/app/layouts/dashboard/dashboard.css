@@ -1,16 +1,17 @@
 .dashboard-layout {
     display: grid;
     grid-template-columns: 300px 1fr;
-    gap: 1rem;
 }
 
 .dashboard-container {
     display: flex;
     flex-direction: column;
-    padding-left: 0.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    gap: 0.5rem;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 1rem;
 }
 
 @media (max-width: 769px) {
