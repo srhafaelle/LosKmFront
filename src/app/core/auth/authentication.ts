@@ -2,13 +2,14 @@ import { User, LoginCredentials, AuthUser } from '@/types';
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { tap } from 'rxjs';
+import { environment } from '@environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class Authentication {
     protected http = inject(HttpClient);
-    protected readonly apiUrl = '';
+    protected readonly apiUrl = environment.apiUrl;
 
     #currentUser = signal<User | null>(this.getUserFromStorage());
     #bearer = signal<string | null>(null);
