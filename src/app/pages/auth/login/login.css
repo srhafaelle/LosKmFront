@@ -48,3 +48,8 @@
 .register-link:hover {
     color: var(--secondary-darker);
 }
+
+.global-error-alert {
+    text-align: center;
+    color: var(--warning);
+}

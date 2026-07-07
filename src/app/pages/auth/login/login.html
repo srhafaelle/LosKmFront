@@ -2,6 +2,13 @@
     <form action="" class="login-container" [formGroup]="loginForm" (ngSubmit)="logIn()">
         <img ngSrc="cvm-logo-169.png" width="300" height="168.8" />
         <div class="divider"></div>
+
+        @if (globalError()) {
+            <div class="global-error-alert">
+                {{ globalError() }}
+            </div>
+        }
+
         <div class="input-elements">
             <ui-input
                 label="Correo Electrónico"
@@ -19,7 +26,13 @@
             />
         </div>
         <div class="action-elements">
-            <ui-button type="submit">Iniciar sesión</ui-button>
+            <ui-button type="submit" [disabled]="isLoading()">
+                @if (isLoading()) {
+                    Cargando...
+                } @else {
+                    Iniciar sesión
+                }
+            </ui-button>
             <p>¿No tienes cuenta? Registrate <span class="register-link">aquí</span></p>
         </div>
     </form>

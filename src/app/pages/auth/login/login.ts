@@ -4,8 +4,10 @@ import { CardComponent } from '@/shared/ui/card-component/card-component';
 import { InputComponent } from '@/shared/ui/input-component/input-component';
 import { getControlError } from '@/shared/utils';
 import { NgOptimizedImage } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 
 @Component({
     selector: 'app-login',
@@ -23,6 +25,7 @@ export class Login {
     // Inyección de dependencias: Formularios y Servicio de autenticación
     #formBuilder = inject(NonNullableFormBuilder);
     #authService = inject(Authentication);
+    #router = inject(Router);
 
     // Formulario para el caso de uso de inicio de sesión.
     loginForm = this.#formBuilder.group({
@@ -45,6 +48,10 @@ export class Login {
         });
     }
 
+    // Estados globales de la página
+    globalError = signal<string | null>(null);
+    isLoading = signal<boolean>(false);
+
     // Eventos que se pueden realizar sobre los componentes de la página, para este caso se prioriza en el inicio de sesión sobre el formulario.
     logIn() {
         if (this.loginForm.invalid) {
@@ -52,10 +59,24 @@ export class Login {
             return;
         }
 
-        const credentials = this.loginForm.getRawValue();
-        console.log('Form submited successfully!');
-        console.table(credentials);
+        this.isLoading.set(true);
+        this.globalError.set(null);
 
-        this.#authService.login(credentials);
+        this.#authService
+            .login(this.loginForm.getRawValue())
+            .pipe(
+                finalize(() => {
+                    this.isLoading.set(false);
+                }),
+            )
+            .subscribe({
+                next: () => {
+                    this.#router.navigate(['/dashboard/index']);
+                },
+                error: (error) => {
+                    console.error(`Error al iniciar sesión: ${error}`);
+                    this.globalError.set(`Credenciales inválidas. Por favor, intente nuevamente.`);
+                },
+            });
     }
 }

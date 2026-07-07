@@ -17,6 +17,10 @@ export type AuthUser = User & {
     token: string;
 };
 
+export type Auth = {
+    token: string;
+};
+
 export type ErrorMessages = Record<string, string | ((error: any) => string)>;
 
 export * from './layouts';

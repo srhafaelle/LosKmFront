@@ -1,39 +1,52 @@
-import { User, LoginCredentials, AuthUser } from '@/types';
-import { HttpClient } from '@angular/common/http';
+import { User, LoginCredentials, AuthUser, Auth } from '@/types';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { tap } from 'rxjs';
 import { environment } from '@environments/environment';
+import { BYPASS_AUTH } from './auth.context';
 
 @Injectable({
     providedIn: 'root',
 })
 export class Authentication {
     protected http = inject(HttpClient);
-    protected readonly apiUrl = environment.apiUrl;
+    protected baseUrl = '/api/v1';
 
     #currentUser = signal<User | null>(this.getUserFromStorage());
-    #bearer = signal<string | null>(null);
+    #bearer = signal<string | null>(this.getTokenFromStorage());
 
     currentUser = this.#currentUser.asReadonly();
-    isAuthenticated = computed(() => !!this.#currentUser());
+    isAuthenticated = computed(() => !!this.#bearer());
+
+    hasValidTokenInStorage(): boolean {
+        return !!this.getTokenFromStorage();
+    }
 
     login(payload: LoginCredentials) {
-        return this.http.post<AuthUser>(`${this.apiUrl}/api/v1/auth/login`, payload).pipe(
-            tap((authUser) => {
-                const { token, ...user } = authUser;
+        return this.http
+            .post<Auth>(`${this.baseUrl}/auth/login`, payload, {
+                context: new HttpContext().set(BYPASS_AUTH, true),
+            })
+            .pipe(
+                tap((authUser) => {
+                    const { token } = authUser;
 
-                localStorage.setItem('token', JSON.stringify(token));
-                localStorage.setItem('user_data', JSON.stringify(user));
-                this.#currentUser.set(user);
-            }),
-        );
+                    this.#bearer.set(token);
+                    localStorage.setItem('token', JSON.stringify(token));
+                    // localStorage.setItem('user_data', JSON.stringify(user));
+                    // this.#currentUser.set(user);
+                }),
+            );
     }
 
     logout() {
-        return this.http.post(`${this.apiUrl}/api/v1/logout`, {}).pipe(
+        return this.http.post(`${this.baseUrl}/auth/logout`, {}).pipe(
             tap(() => {
                 this.#bearer.set(null);
+                this.#currentUser.set(null);
+
                 localStorage.removeItem('user_data');
+                localStorage.removeItem('token');
             }),
         );
     }
@@ -45,6 +58,10 @@ export class Authentication {
     //     });
     // }
 
+    /**
+     *
+     * @returns La representación del token en formato 'Bearer ...' para que pueda ser usado para nuevas peticiones HTTP
+     */
     getBearerToken() {
         const token = this.getTokenFromStorage();
 
