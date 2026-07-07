@@ -5,13 +5,16 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideNgIconsConfig, withExceptionLogger } from '@ng-icons/core';
+import { apiPrefixInterceptorInterceptor, withBearerInterceptor } from '@/core/auth';
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideBrowserGlobalErrorListeners(),
         provideRouter(routes),
         provideClientHydration(withEventReplay()),
-        provideHttpClient(withInterceptors([])), // TODO: PONER EL INTERCEPTOR WITH_BEARER_INTERCEPTOR CUANDO SE NECESITE PROBAR LA PETICION SOBRE ENDPOINTS PROTEGIDOS
+        provideHttpClient(
+            withInterceptors([apiPrefixInterceptorInterceptor, withBearerInterceptor]),
+        ), // TODO: PONER EL INTERCEPTOR WITH_BEARER_INTERCEPTOR CUANDO SE NECESITE PROBAR LA PETICION SOBRE ENDPOINTS PROTEGIDOS
         provideNgIconsConfig({ size: '1.5em', color: 'var(--text)' }, withExceptionLogger()),
     ],
 };

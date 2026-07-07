@@ -61,6 +61,11 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('@/pages/dashboard/statistics/statistics').then((p) => p.Statistics),
             },
+            {
+                path: 'sale-point',
+                loadComponent: () =>
+                    import('@/pages/dashboard/sale-point/sale-point').then((p) => p.SalePoint),
+            },
         ],
     },
 ];
