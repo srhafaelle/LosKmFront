@@ -5,7 +5,7 @@
         [class.has-icon]="hasIcon()"
         [class.error-container]="errorMessage()"
     >
-        @if (!hasIcon()) {
+        @if (hasIcon()) {
             <ng-icon [name]="icon()"></ng-icon>
         }
         <input

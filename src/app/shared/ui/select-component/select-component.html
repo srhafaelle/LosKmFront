@@ -1,0 +1,38 @@
+<div class="select-container">
+    <ui-button (clicked)="toggleOpen()" kind="system" type="button">
+        <div class="button-container-select">
+            <span class="selected-text">{{ selectedValue()?.label || placeholder() }}</span>
+            <ng-icon name="lucideChevronUp" class="icon" [class.open]="isOpen()"></ng-icon>
+        </div>
+    </ui-button>
+
+    @if (isOpen()) {
+        <div class="backdrop" (click)="closeDropdown()"></div>
+        <div class="dropdown-menu">
+            <div class="search-container">
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="Buscar..."
+                    [value]="searchTerm()"
+                    (input)="onSearch($event)"
+                    (click)="$event.stopPropagation()"
+                    autofocus
+                />
+            </div>
+            <ul class="options-list">
+                @for (option of filteredOptions(); track option) {
+                    <li
+                        class="option-item"
+                        [class.selected]="option.label === selectedValue()?.label"
+                        (click)="selectOption(option)"
+                    >
+                        {{ option.label }}
+                    </li>
+                } @empty {
+                    <li class="no-results">Sin resultados</li>
+                }
+            </ul>
+        </div>
+    }
+</div>

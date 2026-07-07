@@ -1,5 +1,11 @@
 import { Component, computed, input, output } from '@angular/core';
 
+export type ButtonProps = {
+    type: 'button' | 'submit' | 'reset';
+    kink: 'primary' | 'secondary' | 'system';
+    disabled: boolean;
+};
+
 @Component({
     selector: 'ui-button',
     imports: [],
@@ -48,6 +54,15 @@ import { Component, computed, input, output } from '@angular/core';
             background-color: var(--secondary-darker);
             box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
         }
+        .button-system {
+            background-color: var(--bg-light);
+            border: var(--border-card);
+            color: var(--text);
+        }
+        .button-system:hover:not(:disabled) {
+            background-color: var(--bg);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
+        }
 
         button:disabled {
             opacity: 0.6;
@@ -57,7 +72,7 @@ import { Component, computed, input, output } from '@angular/core';
 })
 export class ButtonComponent {
     type = input<'button' | 'submit' | 'reset'>('submit');
-    kind = input<'primary' | 'secondary'>('primary');
+    kind = input<'primary' | 'secondary' | 'system'>('primary');
     disabled = input<boolean>(false);
 
     context = computed(() => `button-${this.kind()}`);

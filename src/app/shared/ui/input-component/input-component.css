@@ -43,7 +43,7 @@ input {
     flex: 1;
     border: none;
     outline: none;
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 0rem;
     background-color: transparent;
     width: 100%;
     color: var(--text);

@@ -12,7 +12,7 @@
 }
 .modal-content {
     background: var(--bg);
-    border-radius: var(--radius-defualt);
+    border-radius: var(--radius-default);
     width: 100%;
     max-width: 30rem;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
