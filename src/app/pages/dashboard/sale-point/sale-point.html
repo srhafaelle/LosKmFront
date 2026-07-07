@@ -1,0 +1,44 @@
+@if (isLoading()) {
+    <ui-loading />
+} @else {
+    <section class="sale-point-container">
+        <ui-tabs>
+            <ui-tab title="Subsidiado">
+                <h1>Desde subsidiado</h1>
+            </ui-tab>
+            <ui-tab title="Venta">
+                <h1>Desde venta</h1>
+            </ui-tab>
+            <ui-tab title="Recibido">
+                <h1>Desde recibido</h1>
+            </ui-tab>
+            <ui-tab title="Prueba">
+                <h1>Desde prueba</h1>
+            </ui-tab>
+        </ui-tabs>
+        <ui-card>
+            <h1>Prueba desde el card</h1>
+        </ui-card>
+    </section>
+
+    <!-- Modales que se muestran por encima de todos los demás elementos -->
+    <ui-modal [isOpen]="isSalePointOpen()">
+        <h3 modal-header>Seleccionar zona operativa</h3>
+
+        <form
+            action=""
+            modal-body
+            class="form-operative-zone"
+            [formGroup]="shipmentZoneForm"
+            (ngSubmit)="openTurn()"
+        >
+            <ui-select
+                placeholder="Zonas"
+                [options]="example()"
+                [(selectedValue)]="exampleSelectedValue"
+            ></ui-select>
+            <div class="divider divider-margin"></div>
+            <ui-button>Crear turno</ui-button>
+        </form>
+    </ui-modal>
+}

@@ -1,0 +1,26 @@
+.sale-point-container {
+    display: grid;
+    grid-template-columns: 1fr 500px;
+    width: 100%;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.form-operative-zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-operative-zone .divider-margin {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .sale-point-container {
+        grid-template-columns: 300px;
+    }
+}
