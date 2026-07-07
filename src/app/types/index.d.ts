@@ -20,3 +20,4 @@ export type AuthUser = User & {
 export type ErrorMessages = Record<string, string | ((error: any) => string)>;
 
 export * from './layouts';
+export * from './pages';

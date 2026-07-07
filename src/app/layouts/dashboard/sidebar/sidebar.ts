@@ -41,5 +41,10 @@ export class Sidebar {
             route: '/dashboard/statistics',
             icon: 'bootstrapAppleMusic',
         },
+        {
+            label: 'Punto de venta',
+            route: '/dashboard/sale-point',
+            icon: 'bootstrapAppleMusic',
+        },
     ];
 }
