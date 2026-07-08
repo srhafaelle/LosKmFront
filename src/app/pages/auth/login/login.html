@@ -1,40 +1,73 @@
 <ui-card class="login-card">
-    <form action="" class="login-container" [formGroup]="loginForm" (ngSubmit)="logIn()">
+    <div class="login-container">
         <img ngSrc="cvm-logo-169.png" width="300" height="168.8" />
         <div class="divider"></div>
 
-        @if (globalError()) {
+        @if (globalError().length > 0) {
             <div class="global-error-alert">
                 {{ globalError() }}
             </div>
         }
 
-        <div class="input-elements">
-            <ui-input
-                label="Correo Electrónico"
-                placeholder="usuario@cvm.com.ve"
-                icon="bootstrapPerson"
-                formControlName="email"
-                [errorMessage]="emailError()"
-            />
-            <ui-input
-                label="Contraseña"
-                placeholder="••••••••"
-                type="password"
-                icon="bootstrapKey"
-                formControlName="password"
-                [errorMessage]="passwordError()"
-            />
-        </div>
-        <div class="action-elements">
-            <ui-button type="submit" [disabled]="isLoading()">
-                @if (isLoading()) {
-                    Cargando...
-                } @else {
-                    Iniciar sesión
-                }
-            </ui-button>
-            <p>¿No tienes cuenta? Registrate <span class="register-link">aquí</span></p>
-        </div>
-    </form>
+        <form action="" class="form-container" [formGroup]="loginForm" (ngSubmit)="logIn()">
+            <div class="input-elements">
+                <!-- Elemento base para poder usarlo como input manteniendo las clases en caso de ser necesario -->
+                <div class="label-container">
+                    <label>Correo Electrónico</label>
+                    <div
+                        class="input-container has-icon input-error-container"
+                        [class.input-error-container]="
+                            loginForm.controls.email.invalid && loginForm.controls.email.touched
+                        "
+                    >
+                        <ng-icon name="bootstrapPerson"></ng-icon>
+                        <input
+                            id="email"
+                            type="text"
+                            placeholder="usuario@cvm.com.ve"
+                            formControlName="email"
+                            required
+                        />
+                    </div>
+                    @if (loginForm.controls.email.invalid && loginForm.controls.email.touched) {
+                        <span class="error-text">Proporcionar correo valido.</span>
+                    }
+                </div>
+                <div class="label-container">
+                    <label>Contraseña</label>
+                    <div
+                        class="input-container has-icon"
+                        [class.input-error-container]="
+                            loginForm.controls.email.invalid && loginForm.controls.email.touched
+                        "
+                    >
+                        <ng-icon name="bootstrapKey"></ng-icon>
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="••••••••"
+                            formControlName="password"
+                            required
+                        />
+                    </div>
+                    @if (
+                        loginForm.controls.password.invalid && loginForm.controls.password.touched
+                    ) {
+                        <span class="error-text">La contrseña debe tener más de 8 caracteres.</span>
+                    }
+                </div>
+            </div>
+
+            <div class="action-elements">
+                <ui-button type="submit" [disabled]="isLoading()">
+                    @if (isLoading()) {
+                        Cargando...
+                    } @else {
+                        Iniciar sesión
+                    }
+                </ui-button>
+                <p>¿No tienes cuenta? Registrate <span class="register-link">aquí</span></p>
+            </div>
+        </form>
+    </div>
 </ui-card>

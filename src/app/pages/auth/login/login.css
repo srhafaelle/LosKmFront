@@ -13,20 +13,21 @@
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    max-width: 450px;
     width: 100%;
 }
 .login-card {
     background-color: var(--bg);
-    width: 90%;
 }
 
 .input-elements {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     gap: 1rem;
     width: 100%;
+    margin-bottom: 1.5rem;
 }
 
 .action-elements {
@@ -52,4 +53,8 @@
 .global-error-alert {
     text-align: center;
     color: var(--warning);
+}
+
+.form-container {
+    width: 100%;
 }
