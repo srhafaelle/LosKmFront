@@ -59,7 +59,6 @@ export class Login {
     logIn() {
         if (this.loginForm.invalid) {
             this.loginForm.markAllAsTouched();
-            console.table(this.loginForm.getRawValue());
             return;
         }
 

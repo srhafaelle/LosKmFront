@@ -9,10 +9,10 @@ import {
     type SelectOption,
 } from '@/shared/ui';
 import { Component, effect, inject, OnInit, signal } from '@angular/core';
-import { TurnsService } from './turns-service';
 import { TurnResponse } from '@/types';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { form } from '@angular/forms/signals';
+import { SalesService } from '@/features/dashboard/services/sale-point/sales-service';
+import { TurnsService } from '@/features/dashboard/services/sale-point/turns-service';
 
 @Component({
     selector: 'app-sale-point',
@@ -46,7 +46,8 @@ export class SalePoint implements OnInit {
     }
 
     // Inject services
-    #turnService = inject(TurnsService);
+    readonly #turnService = inject(TurnsService);
+    readonly #salesService = inject(SalesService);
 
     // Formularios para las diferentes acciones:
     // 2. Realizar venta

@@ -1,6 +1,6 @@
 import { Component, inject, input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { SidebarService } from '@/layouts/dashboard/sidebar/sidebar-service';
+import { SidebarService } from '@/core/layouts/dashboard/sidebar/sidebar-service';
 import { lucideMenu } from '@ng-icons/lucide';
 
 @Component({

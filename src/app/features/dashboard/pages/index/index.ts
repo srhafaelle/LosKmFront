@@ -1,5 +1,4 @@
 import { ButtonComponent, ModalComponent, SelectComponent } from '@/shared/ui';
-import { ThisReceiver } from '@angular/compiler';
 import { Component, signal } from '@angular/core';
 
 @Component({
