@@ -1,6 +1,5 @@
 import { Authentication } from '@/core/auth/authentication';
-import { ButtonComponent } from '@/shared/ui/button-component/button-component';
-import { CardComponent } from '@/shared/ui/card-component/card-component';
+import { ButtonComponent, CardComponent, InputComponent } from '@/shared/ui';
 import { formatErrors, getControlError } from '@/shared/utils';
 import { NgOptimizedImage } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -13,7 +12,14 @@ import { finalize } from 'rxjs';
 
 @Component({
     selector: 'app-login',
-    imports: [CardComponent, ButtonComponent, NgOptimizedImage, ReactiveFormsModule, NgIcon],
+    imports: [
+        CardComponent,
+        ButtonComponent,
+        InputComponent,
+        NgIcon,
+        NgOptimizedImage,
+        ReactiveFormsModule,
+    ],
     templateUrl: './login.html',
     styleUrl: './login.css',
     viewProviders: [provideIcons({ bootstrapPerson, bootstrapKey })],

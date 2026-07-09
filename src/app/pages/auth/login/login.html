@@ -12,50 +12,26 @@
         <form action="" class="form-container" [formGroup]="loginForm" (ngSubmit)="logIn()">
             <div class="input-elements">
                 <!-- Elemento base para poder usarlo como input manteniendo las clases en caso de ser necesario -->
-                <div class="label-container">
-                    <label>Correo Electrónico</label>
-                    <div
-                        class="input-container has-icon input-error-container"
-                        [class.input-error-container]="
-                            loginForm.controls.email.invalid && loginForm.controls.email.touched
-                        "
-                    >
-                        <ng-icon name="bootstrapPerson"></ng-icon>
-                        <input
-                            id="email"
-                            type="text"
-                            placeholder="usuario@cvm.com.ve"
-                            formControlName="email"
-                            required
-                        />
-                    </div>
-                    @if (loginForm.controls.email.invalid && loginForm.controls.email.touched) {
-                        <span class="error-text">Proporcionar correo valido.</span>
-                    }
-                </div>
-                <div class="label-container">
-                    <label>Contraseña</label>
-                    <div
-                        class="input-container has-icon"
-                        [class.input-error-container]="
-                            loginForm.controls.email.invalid && loginForm.controls.email.touched
-                        "
-                    >
-                        <ng-icon name="bootstrapKey"></ng-icon>
-                        <input
-                            id="password"
-                            type="password"
-                            placeholder="••••••••"
-                            formControlName="password"
-                            required
-                        />
-                    </div>
-                    @if (
-                        loginForm.controls.password.invalid && loginForm.controls.password.touched
-                    ) {
-                        <span class="error-text">La contrseña debe tener más de 8 caracteres.</span>
-                    }
-                </div>
+                <ui-input label="Correo Electrónico" [errorMessage]="emailError()">
+                    <ng-icon name="bootstrapPerson"></ng-icon>
+                    <input
+                        id="email"
+                        type="text"
+                        placeholder="usuario@cvm.com.ve"
+                        formControlName="email"
+                        required
+                    />
+                </ui-input>
+                <ui-input label="Contraseña" [errorMessage]="passwordError()">
+                    <ng-icon name="bootstrapKey"></ng-icon>
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="••••••••"
+                        formControlName="password"
+                        required
+                    />
+                </ui-input>
             </div>
 
             <div class="action-elements">
