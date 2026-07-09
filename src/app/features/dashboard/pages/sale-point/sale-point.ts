@@ -1,8 +1,5 @@
 import {
     ModalComponent,
-    TabsComponent,
-    TabComponent,
-    CardComponent,
     ButtonComponent,
     LoadingComponent,
     SelectComponent,
@@ -13,18 +10,19 @@ import { TurnResponse } from '@/types';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SalesService } from '@/features/dashboard/services/sale-point/sales-service';
 import { TurnsService } from '@/features/dashboard/services/sale-point/turns-service';
+import { TurnReview } from './turn-review/turn-review';
+import { SalesForm } from './sales-form/sales-form';
 
 @Component({
     selector: 'app-sale-point',
     imports: [
         ButtonComponent,
-        CardComponent,
         LoadingComponent,
         ModalComponent,
         ReactiveFormsModule,
+        SalesForm,
         SelectComponent,
-        TabsComponent,
-        TabComponent,
+        TurnReview,
     ],
     templateUrl: './sale-point.html',
     styleUrl: './sale-point.css',
@@ -127,5 +125,9 @@ export class SalePoint implements OnInit {
                 this.isLoading.set(false);
             },
         });
+    }
+
+    turnClosed() {
+        this.isSalePointOpen.set(true);
     }
 }

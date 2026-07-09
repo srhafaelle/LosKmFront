@@ -1,6 +1,7 @@
 import { accessGuard } from '@/core/auth';
 import { Dashboard } from '@/core/layouts/dashboard/dashboard';
 import { Routes } from '@angular/router';
+
 const routes: Routes = [
     {
         path: '',

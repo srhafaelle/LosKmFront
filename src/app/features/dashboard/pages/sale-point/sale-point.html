@@ -2,23 +2,8 @@
     <ui-loading />
 } @else {
     <section class="sale-point-container">
-        <ui-tabs>
-            <ui-tab title="Subsidiado">
-                <h1>Desde subsidiado</h1>
-            </ui-tab>
-            <ui-tab title="Venta">
-                <h1>Desde venta</h1>
-            </ui-tab>
-            <ui-tab title="Recibido">
-                <h1>Desde recibido</h1>
-            </ui-tab>
-            <ui-tab title="Prueba">
-                <h1>Desde prueba</h1>
-            </ui-tab>
-        </ui-tabs>
-        <ui-card>
-            <h1>Prueba desde el card</h1>
-        </ui-card>
+        <dashboard-sales-form />
+        <dashboard-turn-review [activeTurn]="activeTurn()" (close)="turnClosed()" />
     </section>
 
     <!-- Modales que se muestran por encima de todos los demás elementos -->

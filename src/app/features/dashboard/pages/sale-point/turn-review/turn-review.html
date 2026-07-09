@@ -1,0 +1,8 @@
+<ui-card>
+    @if (!isTurnActive()) {
+        <!-- Este apartado busca identificar si el turno está activo, en caso de no entonces se deja el placeholder de cargando turno -->
+        <p>Cargando turno...</p>
+    } @else {
+        <p>turn-review works!</p>
+    }
+</ui-card>
