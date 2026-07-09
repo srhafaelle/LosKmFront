@@ -1,4 +1,4 @@
-import { Component, computed, forwardRef, input, model, signal } from '@angular/core';
+import { Component, computed, input, model, signal } from '@angular/core';
 import { ButtonComponent } from '../button-component/button-component';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { OverlayModule } from '@angular/cdk/overlay';

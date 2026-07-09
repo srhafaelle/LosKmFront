@@ -1,5 +1,4 @@
 import {
-    InputComponent,
     ModalComponent,
     TabsComponent,
     TabComponent,
@@ -20,7 +19,6 @@ import { form } from '@angular/forms/signals';
     imports: [
         ButtonComponent,
         CardComponent,
-        InputComponent,
         LoadingComponent,
         ModalComponent,
         ReactiveFormsModule,

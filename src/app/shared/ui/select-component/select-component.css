@@ -1,6 +1,9 @@
+:host {
+    width: 100%;
+}
+
 .select-container {
     position: relative;
-    width: 250px;
     font-family: sans-serif;
 }
 
