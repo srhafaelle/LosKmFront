@@ -1,64 +1,107 @@
-import { Component, computed, forwardRef, input } from '@angular/core';
+import {
+    Component,
+    computed,
+    contentChild,
+    forwardRef,
+    input,
+    ViewEncapsulation,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { bootstrapKey, bootstrapPerson } from '@ng-icons/bootstrap-icons';
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import { NgIcon, NgIconComponent, provideIcons } from '@ng-icons/core';
 
 @Component({
     selector: 'ui-input',
-    imports: [NgIcon],
-    templateUrl: './input-component.html',
-    styleUrl: './input-component.css',
-    viewProviders: [provideIcons({ bootstrapKey, bootstrapPerson })],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => InputComponent),
-            multi: true,
-        },
-    ],
+    template: `
+        <div class="label-container">
+            <span>{{ label() }}</span>
+            <div
+                class="input-container"
+                [class.has-icon]="hasIcon()"
+                [class.error-container]="errorMessage()"
+            >
+                <ng-content select="ng-icon"></ng-content>
+                <ng-content select="input"></ng-content>
+            </div>
+            @if (errorMessage()) {
+                <span class="error-text">{{ errorMessage() }}</span>
+            }
+        </div>
+    `,
+    styles: `
+        .input-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-light);
+            border: var(--border-card);
+            border-color: var(--border);
+            border-radius: var(--radius-default);
+            box-shadow: var(--shadow-light);
+            padding: 0rem 0.5rem;
+
+            transition: border-color 300ms ease-in;
+        }
+        .input-container input {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.5rem 0rem;
+            background-color: transparent;
+            width: 100%;
+            color: var(--text);
+        }
+
+        .input-container:focus-within {
+            border-color: var(--primary);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .input-container:focus-within {
+                border-color: var(--secondary-darker);
+            }
+        }
+
+        .has-icon {
+            gap: 1rem;
+        }
+
+        .icon-element {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        input {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.5rem 0rem;
+            background-color: transparent;
+            width: 100%;
+            color: var(--text);
+        }
+
+        .error-text {
+            color: var(--warning);
+        }
+
+        .error-container {
+            border-color: var(--warning);
+        }
+    `,
+    encapsulation: ViewEncapsulation.None,
 })
-export class InputComponent implements ControlValueAccessor {
+export class InputComponent {
     label = input.required<string>();
-
     errorMessage = input<string | false>(false);
-    placeholder = input<string>('');
-    type = input<string>('text');
 
-    icon = input<'bootstrapPerson' | 'bootstrapKey' | ''>('');
-    hasIcon = computed(() => this.icon() !== '');
-
-    // --- ControlValueAccessor Internal State ---
-    value: string = '';
-    isDisabled: boolean = false;
-
-    // Callbacks to notify the parent form of changes
-    onChange: any = () => {};
-    onTouch: any = () => {};
-
-    // 1. Writes a new value from the form model into the view
-    writeValue(value: any): void {
-        this.value = value || '';
-    }
-
-    // 2. Registers a callback function that is called when the control's value changes in the UI
-    registerOnChange(fn: any): void {
-        this.onChange = fn;
-    }
-
-    // 3. Registers a callback function that is called by the forms API on initialization to update the form model on blur
-    registerOnTouched(fn: any): void {
-        this.onTouch = fn;
-    }
-
-    // 4. (Optional) Called when the form disables/enables the control
-    setDisabledState(isDisabled: boolean): void {
-        this.isDisabled = isDisabled;
-    }
-
-    // --- DOM Event Handlers ---
-    onInput(event: Event): void {
-        const val = (event.target as HTMLInputElement).value;
-        this.value = val;
-        this.onChange(val); // Send the new value back up to the parent form!
-    }
+    projectedIcon = contentChild(NgIconComponent);
+    hasIcon = computed(() => this.projectedIcon() !== undefined);
 }
