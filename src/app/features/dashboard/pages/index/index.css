@@ -1,0 +1,39 @@
+.table-container {
+    background-color: var(--bg);
+    border: var(--border-card);
+    border-radius: var(--radius-default);
+    padding: 1.5rem;
+}
+.table-title {
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.card-mobile-container {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.card-mobile {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1rem;
+    border: var(--border-card);
+    border-radius: var(--radius-default);
+    overflow: hidden;
+
+    /* Set background */
+    background: var(--bg);
+    background-size: 200% auto;
+    background-position: bottom center;
+}
+
+.card-mobile-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+}

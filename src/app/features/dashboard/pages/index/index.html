@@ -1,33 +1,74 @@
-<ui-button type="button" kind="secondary" (clicked)="openModal()">Abrir modal</ui-button>
+<!-- TODO EL CONTENIDO DE LA PÁGINA -->
+<!-- Estadisticas sobre datos generales de la aplicación -->
+<dashboard-index-stats />
 
-<ui-modal [isOpen]="isOpen()" (close)="openModal()">
-    <h3 modal-header>Ejemplo</h3>
-    <p modal-body>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim sunt reprehenderit tempore
-        neque dolore ratione doloremque aperiam, quasi a quos rerum. Voluptates vel fugiat mollitia
-        perferendis quae architecto quis soluta?
-    </p>
-</ui-modal>
-
-<ui-select
-    placeholder="Prueba"
-    [options]="[
-        {
-            value: 'hola',
-            label: 'Si se puede',
-        },
-        {
-            value: 'hola1',
-            label: 'Si se puede',
-        },
-        {
-            value: 'hola2',
-            label: 'Si se puede',
-        },
-        {
-            value: 'hola3',
-            label: 'Prueba',
-        },
-    ]"
-/>
-<p>index works!</p>
+<!-- Revisa si el dispositivo es móvil para poder renderizar el contenido acorde a cada dispoitivo -->
+@if (responseService.isMobile()) {
+    <h3 class="table-title">Atención Requerida: Brigadas Morosas</h3>
+    @if (isLoadingTableData()) {
+        <h4 style="text-align: center">Cargando métricas...</h4>
+    } @else if (data().length === 0) {
+        <h4 style="text-align: center">No se encontraron datos.</h4>
+    } @else {
+        <div class="card-mobile-container">
+            @for (item of data(); track $index) {
+                <div class="card-mobile">
+                    <qrcode
+                        [qrdata]="item.qrCode"
+                        [width]="96"
+                        [errorCorrectionLevel]="'M'"
+                        style="text-align: center"
+                    ></qrcode>
+                    <div class="card-mobile-info">
+                        <div>
+                            <p>{{ item.brigade }}</p>
+                            <p>{{ item.monthsDelayed }}</p>
+                            <p>{{ item.totalDebtGold | number: '1.2-2' : 'es' }} g</p>
+                        </div>
+                        <ui-button type="button" (clicked)="showActions(item)">Gestionar</ui-button>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+} @else {
+    <ui-card>
+        <h3 class="table-title">Atención Requerida: Brigadas Morosas</h3>
+        <ui-table [headers]="headers">
+            @if (isLoadingTableData()) {
+                <tr>
+                    <td [colSpan]="headers.length" style="text-align: center">
+                        Cargando métricas...
+                    </td>
+                </tr>
+            } @else if (data().length === 0) {
+                <tr>
+                    <td [colSpan]="headers.length" style="text-align: center">
+                        No se encontraron datos.
+                    </td>
+                </tr>
+            } @else {
+                @for (item of data(); track $index) {
+                    <tr>
+                        <td style="text-align: center">
+                            <qrcode
+                                [qrdata]="item.qrCode"
+                                [width]="96"
+                                [errorCorrectionLevel]="'M'"
+                            ></qrcode>
+                            {{ item.qrCode }}
+                        </td>
+                        <td>{{ item.brigade }}</td>
+                        <td>{{ item.monthsDelayed }}</td>
+                        <td>{{ item.totalDebtGold | number: '1.2-2' : 'es' }} g</td>
+                        <td>
+                            <ui-button type="button" (clicked)="showActions(item)"
+                                >Gestionar</ui-button
+                            >
+                        </td>
+                    </tr>
+                }
+            }
+        </ui-table>
+    </ui-card>
+}
