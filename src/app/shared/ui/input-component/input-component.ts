@@ -14,7 +14,9 @@ import { NgIcon, NgIconComponent, provideIcons } from '@ng-icons/core';
     selector: 'ui-input',
     template: `
         <div class="label-container">
-            <span>{{ label() }}</span>
+            @if (label() !== '') {
+                <span>{{ label() }}</span>
+            }
             <div
                 class="input-container"
                 [class.has-icon]="hasIcon()"

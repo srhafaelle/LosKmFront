@@ -63,6 +63,15 @@ export type ButtonProps = {
             background-color: var(--bg);
             box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
         }
+        .button-destructive {
+            background-color: var(--warning);
+            border: var(--border-card);
+            color: var(--text);
+        }
+        .button-destructive:hover:not(:disabled) {
+            background-color: var(--bg);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
+        }
 
         button:disabled {
             opacity: 0.6;
@@ -72,7 +81,7 @@ export type ButtonProps = {
 })
 export class ButtonComponent {
     type = input<'button' | 'submit' | 'reset'>('submit');
-    kind = input<'primary' | 'secondary' | 'system'>('primary');
+    kind = input<'primary' | 'secondary' | 'system' | 'destructive'>('primary');
     disabled = input<boolean>(false);
 
     context = computed(() => `button-${this.kind()}`);

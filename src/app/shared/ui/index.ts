@@ -4,5 +4,6 @@ export * from './input-component/input-component';
 export * from './loading-component/loading-component';
 export * from './modal-component/modal-component';
 export * from './select-component/select-component';
+export * from './table-component/table-component';
 export * from './tabs-component/tab-component/tab-component';
 export * from './tabs-component/tabs-component';
