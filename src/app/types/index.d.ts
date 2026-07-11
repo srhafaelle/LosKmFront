@@ -5,7 +5,6 @@ export type User = {
     lastName: string;
     active: boolean;
     roles: Array<string>;
-    createdAt: Date;
 };
 
 export type LoginCredentials = {
@@ -22,6 +21,16 @@ export type Auth = {
 };
 
 export type ErrorMessages = Record<string, string | ((error: any) => string)>;
+
+export type ApiResponse<T> = {
+    data: T;
+    meta: {
+        timestamp: string;
+        executionTime: string;
+        path: string;
+        method: string;
+    };
+};
 
 export * from './layouts';
 export * from './pages';

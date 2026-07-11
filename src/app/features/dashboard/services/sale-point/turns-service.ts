@@ -1,4 +1,4 @@
-import { OpenTurnRequest, TurnResponse } from '@/types';
+import { ApiResponse, OpenTurnRequest, TurnResponse } from '@/types';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -15,8 +15,8 @@ export class TurnsService {
      *
      * @returns Un observable que será procesado dentro del componente que llame a la función
      */
-    getOpenTurn(): Observable<TurnResponse> {
-        return this.http.get<TurnResponse>(`${this.baseUrl}/activo`);
+    getOpenTurn(): Observable<ApiResponse<TurnResponse>> {
+        return this.http.get<ApiResponse<TurnResponse>>(`${this.baseUrl}/activo`);
     }
 
     /**
@@ -25,8 +25,8 @@ export class TurnsService {
      * @param request Se solicita el identificador del punto de distribución desde donde se abre el turno
      * @returns Un observable que será procesado dentro del componente que llame a la función
      */
-    openTurn(request: OpenTurnRequest): Observable<TurnResponse> {
-        return this.http.post<TurnResponse>(`${this.baseUrl}/abrir`, request);
+    openTurn(request: OpenTurnRequest): Observable<ApiResponse<TurnResponse>> {
+        return this.http.post<ApiResponse<TurnResponse>>(`${this.baseUrl}/abrir`, request);
     }
 
     /**
@@ -35,7 +35,7 @@ export class TurnsService {
      * @param request Se solicita el identificador del punto de distribución desde donde se abre el turno
      * @returns Un observable que será procesado dentro del componente que llame a la función
      */
-    closeTurn(): Observable<TurnResponse> {
-        return this.http.post<TurnResponse>(`${this.baseUrl}/cerrar`, {});
+    closeTurn(): Observable<ApiResponse<TurnResponse>> {
+        return this.http.post<ApiResponse<TurnResponse>>(`${this.baseUrl}/cerrar`, {});
     }
 }

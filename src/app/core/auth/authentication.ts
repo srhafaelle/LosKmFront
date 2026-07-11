@@ -1,8 +1,7 @@
-import { User, LoginCredentials, AuthUser, Auth } from '@/types';
+import { User, LoginCredentials, AuthUser, Auth, ApiResponse } from '@/types';
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { tap } from 'rxjs';
-import { environment } from '@environments/environment';
+import { Observable, tap } from 'rxjs';
 import { BYPASS_AUTH } from './auth.context';
 
 @Injectable({
@@ -22,24 +21,24 @@ export class Authentication {
         return !!this.getTokenFromStorage();
     }
 
-    login(payload: LoginCredentials) {
+    login(payload: LoginCredentials): Observable<ApiResponse<Auth>> {
         return this.http
-            .post<Auth>(`${this.baseUrl}/auth/login`, payload, {
+            .post<ApiResponse<Auth>>(`${this.baseUrl}/auth/login`, payload, {
                 context: new HttpContext().set(BYPASS_AUTH, true),
             })
             .pipe(
                 tap((authUser) => {
-                    const { token } = authUser;
+                    const { data } = authUser;
 
-                    this.#bearer.set(token);
-                    localStorage.setItem('token', JSON.stringify(token));
+                    this.#bearer.set(data.token);
+                    localStorage.setItem('token', JSON.stringify(data.token));
                     // localStorage.setItem('user_data', JSON.stringify(user));
                     // this.#currentUser.set(user);
                 }),
             );
     }
 
-    logout() {
+    logout(): Observable<Object> {
         return this.http.post(`${this.baseUrl}/auth/logout`, {}).pipe(
             tap(() => {
                 this.#bearer.set(null);

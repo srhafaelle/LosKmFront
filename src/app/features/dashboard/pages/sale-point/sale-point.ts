@@ -6,12 +6,13 @@ import {
     type SelectOption,
 } from '@/shared/ui';
 import { Component, effect, inject, OnInit, signal } from '@angular/core';
-import { TurnResponse } from '@/types';
+import { ApiResponse, TurnResponse } from '@/types';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SalesService } from '@/features/dashboard/services/sale-point/sales-service';
 import { TurnsService } from '@/features/dashboard/services/sale-point/turns-service';
 import { TurnReview } from './turn-review/turn-review';
 import { SalesForm } from './sales-form/sales-form';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-sale-point',
@@ -112,13 +113,13 @@ export class SalePoint implements OnInit {
         this.isLoading.set(true);
 
         this.#turnService.getOpenTurn().subscribe({
-            next: (response: TurnResponse) => {
-                this.activeTurn.set(response);
+            next: (response: ApiResponse<TurnResponse>) => {
+                this.activeTurn.set(response.data);
                 this.isSalePointOpen.set(false); // El modal no es necesario para este caso
                 this.isLoading.set(false);
             },
-            error: (error) => {
-                console.log(`No active Turn ${error}`);
+            error: (err: HttpErrorResponse) => {
+                console.log(`No active Turn ${err.message}`);
                 this.activeTurn.set(null);
 
                 this.isSalePointOpen.set(true);
