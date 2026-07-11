@@ -1,0 +1,21 @@
+.user-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 0.5rem;
+}
+.clickable-icon {
+    cursor: pointer;
+    transition: color 300ms ease-in;
+}
+.clickable-icon:hover {
+    color: var(--warning);
+}
+.clickable-add-icon {
+    cursor: pointer;
+    transition: color 300ms ease-in;
+}
+.clickable-add-icon:hover {
+    color: var(--primary);
+}

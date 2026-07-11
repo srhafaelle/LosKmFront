@@ -1,1 +1,103 @@
 <p>users works!</p>
+<ui-button type="button" (clicked)="openModal()">Crear usuario</ui-button>
+
+<!-- Modal donde se encuentra el formulario para crear un nuevo usuario -->
+<ui-modal [isOpen]="isModalOpen()" (close)="closeModal()">
+    <h3 modal-header>Crear usuario</h3>
+
+    <form
+        action=""
+        modal-body
+        [formGroup]="createUserForm"
+        (ngSubmit)="createUser()"
+        class="user-form"
+    >
+        <ui-input label="Nombres" [errorMessage]="firstNameError()">
+            <input
+                type="text"
+                id="firstName"
+                formControlName="firstName"
+                placeholder="Julian"
+                required
+            />
+        </ui-input>
+        <ui-input label="Apellidos" [errorMessage]="lastNameError()">
+            <input
+                id="lastName"
+                type="text"
+                placeholder="Alvarez"
+                formControlName="lastName"
+                required
+            />
+        </ui-input>
+        <ui-input label="Correo Electrónico" [errorMessage]="emailError()">
+            <input
+                type="text"
+                id="email"
+                formControlName="email"
+                placeholder="Julian@Barca.2026"
+                required
+            />
+        </ui-input>
+        <ui-input label="Contraseña" [errorMessage]="passwordError()">
+            <input
+                type="text"
+                id="password"
+                formControlName="password"
+                placeholder="Julian@Barca.2026"
+                required
+            />
+        </ui-input>
+        <ui-input label="Confirmar contraseña">
+            <input
+                type="text"
+                id="confirmPassword"
+                formControlName="confirmPassword"
+                placeholder="Julian@Barca.2026"
+                required
+            />
+        </ui-input>
+
+        <div class="divider"></div>
+
+        <div class="roles">
+            <ui-input label="Roles" [errorMessage]="rolesError()">
+                <ng-icon
+                    name="bootstrapPlus"
+                    class="clickable-add-icon"
+                    (click)="addRole()"
+                ></ng-icon>
+                <input
+                    type="text"
+                    placeholder="Ingresa un rol (e.g., Admin)"
+                    [(ngModel)]="newRoleInput"
+                    [ngModelOptions]="{ standalone: true }"
+                />
+            </ui-input>
+            @if (roles.controls.length > 0) {
+                <div class="roles-list" formArrayName="roles">
+                    @for (item of roles.controls; track $index) {
+                        <ui-input label="">
+                            <ng-icon
+                                name="bootstrapTrash"
+                                (click)="removeRole($index)"
+                                class="clickable-icon"
+                            ></ng-icon>
+                            <input type="text" [formControlName]="$index" readonly />
+                        </ui-input>
+                        <!-- <ui-button type="button" (clicked)="removeRole($index)" kind="destructive">
+                            <ng-icon name="bootstrapTrash" (click)="removeRole($index)"></ng-icon>
+                        </ui-button> -->
+                    }
+                </div>
+            }
+        </div>
+        <ui-button type="submit" kind="primary" [disabled]="isLoading()">
+            @if (isLoading()) {
+                Cargando...
+            } @else {
+                Crear
+            }
+        </ui-button>
+    </form>
+</ui-modal>
