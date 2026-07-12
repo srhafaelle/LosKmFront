@@ -36,4 +36,19 @@
     flex-direction: column;
     justify-content: center;
     gap: 0.5rem;
+
+    .card-mobile-info-brigade {
+        font-weight: 600;
+        font-size: 1.25rem;
+    }
+    .card-mobile-info-months {
+        color: var(--text-muted);
+        span {
+            color: var(--warning);
+        }
+    }
+    .card-mobile-info-gold {
+        color: var(--secondary);
+        font-weight: 500;
+    }
 }

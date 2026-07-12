@@ -21,9 +21,15 @@
                     ></qrcode>
                     <div class="card-mobile-info">
                         <div>
-                            <p>{{ item.brigade }}</p>
-                            <p>{{ item.monthsDelayed }}</p>
-                            <p>{{ item.totalDebtGold | number: '1.2-2' : 'es' }} g</p>
+                            <p class="card-mobile-info-brigade">{{ item.brigade }}</p>
+                            <p class="card-mobile-info-months">
+                                Retraso de
+                                <span>{{ item.monthsDelayed }}</span>
+                                meses
+                            </p>
+                            <p class="card-mobile-info-gold">
+                                {{ item.totalDebtGold | number: '1.2-2' : 'es' }} g
+                            </p>
                         </div>
                         <ui-button type="button" (clicked)="showActions(item)">Gestionar</ui-button>
                     </div>
