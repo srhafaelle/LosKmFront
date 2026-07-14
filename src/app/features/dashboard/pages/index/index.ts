@@ -4,6 +4,8 @@ import { CardComponent, TableComponent, ButtonComponent } from '@/shared/ui';
 import { DecimalPipe } from '@angular/common';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { ResponsiveService } from '@/core/responsive-service';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideExternalLink } from '@ng-icons/lucide';
 
 interface DashboardTable {
     qrCode: string;
@@ -13,9 +15,18 @@ interface DashboardTable {
 }
 @Component({
     selector: 'app-index',
-    imports: [CardComponent, DecimalPipe, Stats, TableComponent, ButtonComponent, QRCodeComponent],
+    imports: [
+        CardComponent,
+        DecimalPipe,
+        Stats,
+        TableComponent,
+        ButtonComponent,
+        QRCodeComponent,
+        NgIcon,
+    ],
     templateUrl: './index.html',
     styleUrl: './index.css',
+    viewProviders: [provideIcons({ lucideExternalLink })],
 })
 export class Index {
     protected readonly responseService = inject(ResponsiveService);

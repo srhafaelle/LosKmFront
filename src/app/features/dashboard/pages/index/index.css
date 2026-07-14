@@ -51,4 +51,9 @@
         color: var(--secondary);
         font-weight: 500;
     }
+    .card-mobile-info-link-action {
+        margin-top: 0.5rem;
+        color: var(--text-muted);
+        text-decoration: underline;
+    }
 }

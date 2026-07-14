@@ -4,7 +4,7 @@
 
 <!-- Revisa si el dispositivo es móvil para poder renderizar el contenido acorde a cada dispoitivo -->
 @if (responseService.isMobile()) {
-    <h3 class="table-title">Atención Requerida: Brigadas Morosas</h3>
+    <h3 class="table-title">Atención Requerida: Brigadas Morosas (seleccionar tarjeta)</h3>
     @if (isLoadingTableData()) {
         <h4 style="text-align: center">Cargando métricas...</h4>
     } @else if (data().length === 0) {
@@ -12,7 +12,7 @@
     } @else {
         <div class="card-mobile-container">
             @for (item of data(); track $index) {
-                <div class="card-mobile">
+                <div class="card-mobile" (click)="showActions(item)">
                     <qrcode
                         [qrdata]="item.qrCode"
                         [width]="96"
@@ -30,8 +30,16 @@
                             <p class="card-mobile-info-gold">
                                 {{ item.totalDebtGold | number: '1.2-2' : 'es' }} g
                             </p>
+                            <p class="card-mobile-info-link-action">
+                                Ver más información
+                                <ng-icon
+                                    name="lucideExternalLink"
+                                    color="var(--text-muted)"
+                                    size="14"
+                                ></ng-icon>
+                            </p>
                         </div>
-                        <ui-button type="button" (clicked)="showActions(item)">Gestionar</ui-button>
+                        <!-- <ui-button type="button" (clicked)="showActions(item)">Gestionar</ui-button> -->
                     </div>
                 </div>
             }

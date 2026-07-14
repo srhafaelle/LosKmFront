@@ -1,14 +1,5 @@
-import {
-    Component,
-    computed,
-    contentChild,
-    forwardRef,
-    input,
-    ViewEncapsulation,
-} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { bootstrapKey, bootstrapPerson } from '@ng-icons/bootstrap-icons';
-import { NgIcon, NgIconComponent, provideIcons } from '@ng-icons/core';
+import { Component, computed, contentChild, input, ViewEncapsulation } from '@angular/core';
+import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
     selector: 'ui-input',
@@ -23,7 +14,7 @@ import { NgIcon, NgIconComponent, provideIcons } from '@ng-icons/core';
                 [class.error-container]="errorMessage()"
             >
                 <ng-content select="ng-icon"></ng-content>
-                <ng-content select="input"></ng-content>
+                <ng-content select="input, select, textarea"></ng-content>
             </div>
             @if (errorMessage()) {
                 <span class="error-text">{{ errorMessage() }}</span>
@@ -44,7 +35,9 @@ import { NgIcon, NgIconComponent, provideIcons } from '@ng-icons/core';
 
             transition: border-color 300ms ease-in;
         }
-        .input-container input {
+        .input-container input,
+        .input-container select,
+        .input-container textarea {
             display: flex;
             justify-content: center;
             align-items: center;

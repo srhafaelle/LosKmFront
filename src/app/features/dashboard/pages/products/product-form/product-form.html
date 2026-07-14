@@ -1,0 +1,36 @@
+<ui-modal [isOpen]="isOpen()" (close)="closeModal()">
+    <h3 modal-header>Crear producto</h3>
+
+    <form
+        action=""
+        modal-body
+        [formGroup]="createProductForm"
+        (ngSubmit)="createProduct()"
+        class="form-modal"
+    >
+        <ui-input label="Nombre">
+            <input type="text" formControlName="name" />
+        </ui-input>
+
+        <ui-input label="Unidad de medida">
+            <select name="" id="" aria-placeholder="Unidad de medida" formControlName="messureUnit">
+                @for (item of messureOptions; track $index) {
+                    <option [value]="item.value">{{ item.label }}</option>
+                }
+            </select>
+        </ui-input>
+
+        <ui-input label="Precio (Grama)">
+            <input
+                type="text"
+                inputmode="numeric"
+                pattern="[0-9]*"
+                formControlName="price"
+                appNumberOnly
+                [allowDecimals]="true"
+            />
+        </ui-input>
+
+        <ui-button type="submit" kind="primary">Guardar</ui-button>
+    </form>
+</ui-modal>
