@@ -1,1 +1,99 @@
-<p>brigade works!</p>
+<!-- Botones para crear brigadas o mineros -->
+<div class="brigade-header">
+    <h2 style="color: var(--primary)">Gestión de Fuerza Laboral (CVM)</h2>
+    <div class="brigade-header-actions">
+        <ui-button type="button" (clicked)="brigadeModal()">Crear brigada</ui-button>
+        <ui-button type="button" (clicked)="minerModal()">Crear minero</ui-button>
+    </div>
+</div>
+
+<!-- Tabs para poder mostrar las brigadas o el directorio de mineros -->
+<ui-tabs>
+    <ui-tab title="Brigadas">
+        <!-- Tabla dentro de cada tab para mostrar la información de las brigadas o de los mineros por separado -->
+        <ui-card>
+            <ui-table [headers]="headersBrigades">
+                @if (isLoading()) {
+                    <tr>
+                        <td [colSpan]="headersBrigades.length" style="text-align: center">
+                            Cargando brigadas...
+                        </td>
+                    </tr>
+                } @else if (dataBrigades().length === 0) {
+                    <tr>
+                        <td [colSpan]="headersBrigades.length" style="text-align: center">
+                            No se encontraron datos.
+                        </td>
+                    </tr>
+                } @else {
+                    @for (item of dataBrigades(); track $index) {
+                        <tr>
+                            <td>
+                                <qrcode
+                                    [qrdata]="item.qr"
+                                    [width]="96"
+                                    [errorCorrectionLevel]="'M'"
+                                    style="text-align: center"
+                                ></qrcode>
+                            </td>
+                            <td>{{ item.name }} g</td>
+                            <td>{{ item.goldPaid | number: '1.2-2' : 'es' }} g</td>
+                            <td>{{ item.arrimeDebt | number: '1.2-2' : 'es' }} g</td>
+                            <td>
+                                <ui-button type="button">Gestionar</ui-button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </ui-table>
+        </ui-card>
+    </ui-tab>
+    <ui-tab title="Mineros">
+        <!-- Tabla dentro de cada tab para mostrar la información de las brigadas o de los mineros por separado -->
+        <ui-card>
+            <ui-table [headers]="headersMiners">
+                @if (isLoading()) {
+                    <tr>
+                        <td [colSpan]="headersMiners.length" style="text-align: center">
+                            Cargando mineros...
+                        </td>
+                    </tr>
+                } @else if (dataMiners().length === 0) {
+                    <tr>
+                        <td [colSpan]="headersMiners.length" style="text-align: center">
+                            No se encontraron datos.
+                        </td>
+                    </tr>
+                } @else {
+                    @for (item of dataMiners(); track $index) {
+                        <tr>
+                            <td>
+                                {{ item.dni }}
+                            </td>
+                            <td>{{ item.fullName }} g</td>
+                            <td>
+                                {{ item.position }}
+                            </td>
+                            <td>
+                                {{ item.brigade }}
+                            </td>
+                            <td>
+                                <ui-button type="button">Gestionar</ui-button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </ui-table>
+        </ui-card>
+    </ui-tab>
+</ui-tabs>
+
+<!-- Modal para registrar un nuevo minero -->
+<dashboard-miner-form></dashboard-miner-form>
+<!-- Modal para registrar una nueva brigada -->
+<dashboard-brigade-form></dashboard-brigade-form>
+<!-- Modal para actualizar datos del minero -->
+<dashboard-miner-update-form></dashboard-miner-update-form>
+<!-- Modal para gestionar miembros de una brigada (fundador de la brigada no puede ser desincorporado sin que la brigada no sea desincorporada) -->
+<dashboard-brigade-managment-form></dashboard-brigade-managment-form>
+<!-- Historial clínico operativo (preguntar!!!) -->

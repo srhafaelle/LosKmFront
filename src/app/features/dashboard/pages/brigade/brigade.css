@@ -1,0 +1,12 @@
+.brigade-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brigade-header .brigade-header-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
