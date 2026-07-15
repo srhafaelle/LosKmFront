@@ -1,5 +1,44 @@
-<p>users works!</p>
-<ui-button type="button" (clicked)="openModal()">Crear usuario</ui-button>
+<div class="users-header">
+    <h2 style="color: var(--primary)">Gestión de usuarios</h2>
+    <div>
+        <ui-button type="button" (clicked)="openModal()">Crear usuario</ui-button>
+    </div>
+</div>
+
+<!-- Tabla para mostrar la información de los usuarios -->
+<ui-card>
+    <ui-table [headers]="headers">
+        @if (isLoadingTableData()) {
+            <tr>
+                <td [colSpan]="headers.length" style="text-align: center">Cargando usuarios...</td>
+            </tr>
+        } @else if (listOfUsers().length === 0) {
+            <tr>
+                <td [colSpan]="headers.length" style="text-align: center">
+                    No se encontraron datos.
+                </td>
+            </tr>
+        } @else {
+            @for (item of listOfUsers(); track $index) {
+                <tr>
+                    <td>
+                        {{ item.email }}
+                    </td>
+                    <td>{{ item.role }} g</td>
+                    <td
+                        [class.active]="item.state.includes('active')"
+                        [class.inactive]="item.state.includes('inactive')"
+                    >
+                        {{ item.state }}
+                    </td>
+                    <td>
+                        <ui-button type="button">Gestionar</ui-button>
+                    </td>
+                </tr>
+            }
+        }
+    </ui-table>
+</ui-card>
 
 <!-- Modal donde se encuentra el formulario para crear un nuevo usuario -->
 <ui-modal [isOpen]="isModalOpen()" (close)="closeModal()">
@@ -60,6 +99,7 @@
 
         <div class="divider"></div>
 
+        <!-- Tener en cuenta que este apartado puede cambiar por un select nativo debido a que el usuario solo puede tener un rol -->
         <div class="roles">
             <ui-input label="Roles" [errorMessage]="rolesError()">
                 <ng-icon

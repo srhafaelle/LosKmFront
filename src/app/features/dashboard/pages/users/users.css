@@ -19,3 +19,16 @@
 .clickable-add-icon:hover {
     color: var(--primary);
 }
+
+.active {
+    color: oklch(0.6041 0.1155 160.6);
+}
+
+.inactive {
+    color: var(--warning);
+}
+.users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

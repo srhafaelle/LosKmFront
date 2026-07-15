@@ -7,12 +7,24 @@ import {
     Validators,
 } from '@angular/forms';
 import { UserService } from '@/features/dashboard/services/users/user-service';
-import { InputComponent, ModalComponent, ButtonComponent } from '@/shared/ui';
+import {
+    InputComponent,
+    ModalComponent,
+    ButtonComponent,
+    CardComponent,
+    TableComponent,
+} from '@/shared/ui';
 import { User } from '@/types';
 import { getControlError } from '@/shared/utils';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { bootstrapPlus, bootstrapTrash } from '@ng-icons/bootstrap-icons';
+import { map } from 'rxjs';
 
+interface UsersTable {
+    email: string;
+    role: string;
+    state: string;
+}
 @Component({
     selector: 'app-users',
     imports: [
@@ -22,6 +34,8 @@ import { bootstrapPlus, bootstrapTrash } from '@ng-icons/bootstrap-icons';
         ButtonComponent,
         FormsModule,
         NgIcon,
+        CardComponent,
+        TableComponent,
     ],
     templateUrl: './users.html',
     styleUrl: './users.css',
@@ -32,11 +46,19 @@ export class Users implements OnInit {
     readonly #fb = inject(NonNullableFormBuilder);
     readonly #userService = inject(UserService);
 
+    ngOnInit() {
+        this.isLoading.set(true);
+        this.getAllUsers();
+    }
+
     // Internal state
+    headers = ['correo electrónico', 'rol asignado', 'estado', 'acciones'];
+    isLoadingTableData = signal<boolean>(false);
+
     isLoading = signal<boolean>(false);
     isModalOpen = signal<boolean>(false);
     errors = signal<string[]>([]);
-    listOfUsers = signal<User[]>([]);
+    listOfUsers = signal<UsersTable[]>([]);
 
     openModal() {
         this.isModalOpen.set(true);
@@ -61,6 +83,7 @@ export class Users implements OnInit {
         return this.createUserForm.get('roles') as FormArray;
     }
 
+    // Se pueden eliminar estas dos funciones en caso de cambiar el componente a un select nativo
     addRole() {
         const name = this.newRoleInput().trim();
         console.log('Prueba', name);
@@ -109,11 +132,6 @@ export class Users implements OnInit {
         });
     }
 
-    ngOnInit() {
-        this.isLoading.set(true);
-        this.getAllUsers();
-    }
-
     createUser() {
         if (this.createUserForm.invalid) {
             const { confirmPassword, ...payload } = this.createUserForm.getRawValue();
@@ -141,11 +159,22 @@ export class Users implements OnInit {
     }
 
     getAllUsers() {
-        this.#userService.getAllUsers().subscribe({
-            next: (users) => {
-                this.listOfUsers.set(users);
-                this.isLoading.set(false);
-            },
-        });
+        this.#userService
+            .getAllUsers()
+            .pipe(
+                map<User[], UsersTable[]>((value) => {
+                    return value.map((user) => ({
+                        email: user.email,
+                        state: user.active ? 'activo' : 'inactivo',
+                        role: user.roles,
+                    }));
+                }),
+            )
+            .subscribe({
+                next: (users) => {
+                    this.listOfUsers.set(users);
+                    this.isLoading.set(false);
+                },
+            });
     }
 }

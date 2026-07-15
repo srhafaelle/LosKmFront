@@ -4,7 +4,7 @@ export type User = {
     firstName: string;
     lastName: string;
     active: boolean;
-    roles: Array<string>;
+    roles: string;
 };
 
 export type LoginCredentials = {
